@@ -21,7 +21,6 @@ Polynom::Polynom(unsigned pow, string input)
 	: n(pow) {
 	v_Q.resize(pow + 1);
 	int k = pow;
-	char tmp;
 	bool tmp_sign = false;
 	bool isN = false;
 	string tmp_Z, tmp_N;

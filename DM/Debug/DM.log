@@ -1,28 +1,8 @@
-﻿Сборка начата 18.04.2016 0:19:13.
+﻿Сборка начата 18.04.2016 0:47:25.
      1>Проект "C:\Users\Absolute\Documents\Visual Studio 2015\Projects\DM\DM\DM.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\DM.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt BigInt.cpp DM.cpp Natural.cpp Polynom.cpp Rational.cpp
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\DM.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Rational.cpp
          Rational.cpp
-         Natural.cpp
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\natural.cpp(52): warning C4018: <: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\natural.cpp(96): warning C4018: <: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\natural.cpp(100): warning C4018: <: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\natural.cpp(117): warning C4018: <: несоответствие типов со знаком и без знака
-         DM.cpp
-         BigInt.cpp
-         Создание кода...
-         Компиляция...
-         Polynom.cpp
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(29): warning C4018: <: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(24): warning C4101: tmp: неиспользованная локальная переменная
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(80): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(83): warning C4018: <=: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(92): warning C4018: <: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(98): warning C4018: <: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(108): warning C4018: >=: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(158): warning C4018: <=: несоответствие типов со знаком и без знака
-     1>c:\users\absolute\documents\visual studio 2015\projects\dm\dm\polynom.cpp(189): warning C4018: <: несоответствие типов со знаком и без знака
-         Создание кода...
        Link:
          D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Absolute\Documents\Visual Studio 2015\Projects\DM\Debug\DM.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Absolute\Documents\Visual Studio 2015\Projects\DM\Debug\DM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Absolute\Documents\Visual Studio 2015\Projects\DM\Debug\DM.lib" /MACHINE:X86 Debug\BigInt.obj
          Debug\DM.obj
@@ -35,4 +15,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:03.62
+Затраченное время: 00:00:00.87

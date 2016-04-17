@@ -3,7 +3,7 @@
 #include "Rational.h"
 
 Rational::Rational()
-	: Z(0, "0"), N("1") {
+	: Z("0"), N("1") {
 }
 
 Rational::Rational(BigInt _Z, Natural _N)

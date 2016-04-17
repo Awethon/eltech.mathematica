@@ -10,7 +10,7 @@ public:
 
 	BigInt(string strZ);
 
-	BigInt(bool _sign, string kek);
+	//BigInt(bool _sign, string kek);
 
 	BigInt(bool _sign, Natural hey_buddy);
 

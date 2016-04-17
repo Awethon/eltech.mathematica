@@ -7,9 +7,9 @@ BigInt::BigInt() {
 	sign = 0;
 }
 
-BigInt::BigInt(bool _sign, string kek)
-	: sign(_sign), N(kek) {
-}
+//BigInt::BigInt(bool _sign, string kek)
+//	: sign(_sign), N(kek) {
+//}
 
 BigInt::BigInt(string strZ) {
 	if (strZ[0] == '-') {
@@ -63,7 +63,7 @@ BigInt BigInt::MUL_ZM_Z(BigInt a) {
 BigInt BigInt::MUL_ZZ_Z(BigInt a, BigInt b) {
 
 	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0) {
-		BigInt result(0, "0");
+		BigInt result("0");
 		return result;
 	}
 	if (POZ_Z_D(a) == POZ_Z_D(b))
@@ -93,7 +93,7 @@ BigInt BigInt::ADD_ZZ_Z(BigInt a, BigInt b) {
 		BigInt result(b.getSign(), Natural::SUB_NN_N(b.N, a.N));
 		return result;
 	}
-	BigInt result(0, "0");
+	BigInt result("0");
 	return result;
 }
 
@@ -110,13 +110,13 @@ BigInt BigInt::SUB_ZZ_Z(BigInt a, BigInt b) {
 		BigInt result(b.getSign(), Natural::SUB_NN_N(ABS_Z_N(b), ABS_Z_N(a)));
 		return result;
 	}
-	BigInt result(0, "0");
+	BigInt result("0");
 	return result;
 }
 
 BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
 	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0) {
-		BigInt result(0, "0");
+		BigInt result("0");
 		return result;
 	}
 	if (POZ_Z_D(a) == POZ_Z_D(b))
