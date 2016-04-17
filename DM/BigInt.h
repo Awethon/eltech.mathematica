@@ -20,7 +20,7 @@ public:
 
 	static Natural ABS_Z_N(BigInt);
 	static int POZ_Z_D(BigInt x);
-	int COM_ZZ_D(BigInt, BigInt);
+	static int COM_ZZ_D(BigInt, BigInt);
 	static BigInt MUL_ZM_Z(BigInt);// на -1
 	static Natural TRANS_Z_N(BigInt);
 	static BigInt TRANS_N_Z(Natural);
