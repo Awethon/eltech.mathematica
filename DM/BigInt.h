@@ -12,7 +12,7 @@ public:
 
 	//BigInt(bool _sign, string kek);
 
-	BigInt(bool _sign, Natural hey_buddy);
+	BigInt(bool _sign, Natural N);
 
 	bool getSign() const;
 

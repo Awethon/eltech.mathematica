@@ -107,19 +107,6 @@ Polynom Polynom::MUL_Pxk_P(Polynom a, unsigned int k) {
 	for (i = a.n + k; i >= k; i--) {
 		result.v_Q[i] = a.v_Q[i - k]; // Значения в массиве коэффициентов сдвигаются к старшим степеням
 	}
-
-	//for (i = k - 1; i >= 0; i--)
-	//{
-	//	C[i].Q->N = 1;                          // В числителе новой структуры 1 знак
-	//	C[i].Q->F = true;
-	//	C[i].Q->A = (int*)malloc(C, (sizeof(int)));
-	//	C[i].Q->A[0] = 0;						// Значение новой структуры 0
-
-
-	//	C[i].Nat->N = 1;                          // В знаменателе новой структуры 1 знак
-	//	C[i].Nat->A = (int*)malloc(C, (sizeof(int)));
-	//	C[i].Nat->A[0] = 1;						// Значение новой структуры 1
-	//}
 	return result;
 };
 

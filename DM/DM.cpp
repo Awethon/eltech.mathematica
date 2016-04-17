@@ -61,10 +61,9 @@ void output(Polynom out) {
 	}
 
 int main() {
-	Rational result;
-	Rational kek(0, "10", "3");
-	Rational lol(1, "3", "2");
-	result = Rational::ADD_QQ_Q(kek, lol);
+	Polynom result;
+	Polynom kek(2, "10/3 3/2 1/4");
+	result = Polynom::MUL_Pxk_P(kek, 3);
 
 	output(result);
 	system("pause");

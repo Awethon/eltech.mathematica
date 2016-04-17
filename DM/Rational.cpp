@@ -6,12 +6,12 @@ Rational::Rational()
 	: Z("0"), N("1") {
 }
 
-Rational::Rational(BigInt _Z, Natural _N)
-	: Z(_Z), N(_N) {
+Rational::Rational(BigInt Z, Natural N)
+	: Z(Z), N(N) {
 }
 
-Rational::Rational(bool _sign, string str_Z, string str_N)
-	: Z(_sign, str_Z), N(str_N) {
+Rational::Rational(bool sign, string str_Z, string str_N)
+	: Z(sign, str_Z), N(str_N) {
 }
 
 unsigned int Rational::getSize_Z() {

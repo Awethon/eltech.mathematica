@@ -21,8 +21,8 @@ BigInt::BigInt(string strZ) {
 	}
 }
 
-BigInt::BigInt(bool _sign, Natural hey_buddy)
-	: sign(_sign), N(hey_buddy) {
+BigInt::BigInt(bool sign, Natural N)
+	: sign(sign), N(N) {
 }
 
 bool BigInt::getSign() const {
