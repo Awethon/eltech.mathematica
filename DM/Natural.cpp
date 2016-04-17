@@ -166,9 +166,8 @@ Natural Natural::DIV_NN_Dk(Natural a, Natural b) {
 };
 
 Natural Natural::DIV_NN_N(Natural a, Natural b) {
-	Natural res, sub;
-	res.resize(1);
-	res.natural_v[0] = 0;
+	Natural res("0");
+	Natural sub;
 	Natural c = a;
 	while (COM_NN_D(c, b) != 1) {
 		res = ADD_NN_N(res, DIV_NN_Dk(c, b));

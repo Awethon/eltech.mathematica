@@ -39,6 +39,12 @@ int BigInt::POZ_Z_D(BigInt x) {
 	return 1;
 }
 
+int BigInt::COM_ZZ_D(BigInt a, BigInt b) {
+	if (POZ_Z_D(a) == POZ_Z_D(b))
+		return Natural::COM_NN_D(a.N, b.N);
+	return POZ_Z_D(a) == 2 ? 2 : 1;
+}
+
 BigInt BigInt::MUL_ZM_Z(BigInt a) {
 	BigInt result((a.sign == 0) ? 1 : 0, a.N);
 	return result;
