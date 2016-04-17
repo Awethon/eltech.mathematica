@@ -34,8 +34,10 @@ bool Rational::getSign_Q() {
 }
 
 Rational Rational::RED_Q_Q(Rational A) {
-	Rational B(BigInt::DIV_ZZ_Z(A.Z, BigInt::TRANS_N_Z(Natural::GCF_NN_N(BigInt::TRANS_Z_N(A.Z), A.N))), Natural::DIV_NN_N(A.N, Natural::GCF_NN_N(BigInt::TRANS_Z_N(A.Z), A.N)));
-	return B;
+	BigInt Z = BigInt::DIV_ZZ_Z(A.Z, BigInt::TRANS_N_Z(Natural::GCF_NN_N(BigInt::TRANS_Z_N(A.Z), A.N)));
+	Natural N = Natural::DIV_NN_N(A.N, Natural::GCF_NN_N(BigInt::TRANS_Z_N(A.Z), A.N));
+	Rational result(Z, N);
+	return result;
 };
 
 bool Rational::INT_Q_B(Rational a) {

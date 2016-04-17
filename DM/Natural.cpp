@@ -7,15 +7,15 @@ Natural::Natural() {
 
 Natural::Natural(string strnum) {
 	vsize = strnum.length();
-	natural_v.resize(vsize);
+	v_N.resize(vsize);
 	for (unsigned int i = 0; i < vsize; i++) {
-		natural_v.at(vsize - 1 - i) = strnum[i] - 48;
+		v_N.at(vsize - 1 - i) = strnum[i] - 48;
 	}
 }
 
 unsigned short Natural::getDigit(unsigned int rank) {
 	if (rank >= 0 && rank < vsize) {
-		return natural_v[rank];
+		return v_N[rank];
 	}
 	exit(-1);
 };
@@ -25,7 +25,7 @@ unsigned int Natural::getSize() {
 };
 
 void Natural::resize(unsigned int newSize) {
-	natural_v.resize(newSize);
+	v_N.resize(newSize);
 	vsize = newSize;
 }
 
@@ -35,27 +35,27 @@ int Natural::COM_NN_D(Natural a, Natural b) {
 	if (a.vsize < b.vsize)
 		return 1;
 	for (int i = a.vsize - 1; i >= 0; i--) {
-		if (a.natural_v[i] > b.natural_v[i])
+		if (a.v_N[i] > b.v_N[i])
 			return 2;
-		if (a.natural_v[i] < b.natural_v[i])
+		if (a.v_N[i] < b.v_N[i])
 			return 1;
 	}
 	return 0;
 }
 
 bool Natural::NZER_N_B(Natural a) {
-	return (a.vsize == 1 && a.natural_v[0] == 0) ? false : true;
+	return (a.vsize == 1 && a.v_N[0] == 0) ? false : true;
 };
 
 Natural Natural::ADD_1N_N(Natural a) {
 	int i;
-	for (i = 0; (i < a.vsize) ? (a.natural_v[i] == 9 ? true : false) : false; i++);
+	for (i = 0; (i < a.vsize) ? (a.v_N[i] == 9 ? true : false) : false; i++);
 
 	if (i == a.vsize)
 		a.resize(a.vsize + 1);
 	for (int j = 0; j < i; j++)
-		a.natural_v[j] = 0;
-	a.natural_v[i]++;
+		a.v_N[j] = 0;
+	a.v_N[i]++;
 	return a;
 };
 
@@ -68,17 +68,17 @@ Natural Natural::ADD_NN_N(Natural a, Natural b) {
 		swap(a, b);
 	c.resize(a.vsize);
 	for (i = 0; i < b.vsize; i++) {
-		c.natural_v[i] = (a.natural_v[i] + b.natural_v[i] + r) % 10;
-		r = (a.natural_v[i] + b.natural_v[i] + r) / 10;
+		c.v_N[i] = (a.v_N[i] + b.v_N[i] + r) % 10;
+		r = (a.v_N[i] + b.v_N[i] + r) / 10;
 	}
 
 	for (i; i < a.vsize; i++) {
-		c.natural_v[i] = (a.natural_v[i] + r) % 10;
-		r = (a.natural_v[i] + r) / 10;
+		c.v_N[i] = (a.v_N[i] + r) % 10;
+		r = (a.v_N[i] + r) / 10;
 	}
 	if (r) {
 		c.resize(c.getSize() + 1);
-		c.natural_v[i] = r;
+		c.v_N[i] = r;
 		i++;
 	}
 	return c;
@@ -94,14 +94,14 @@ Natural Natural::SUB_NN_N(Natural a, Natural b) {
 	c.resize(a.getSize());
 
 	for (i; i < b.getSize(); i++) {
-		c.natural_v[i] = (a.natural_v[i] - b.natural_v[i] - r + 10) % 10;
-		r = (a.natural_v[i] - b.natural_v[i] - r) >= 0 ? 0 : 1;
+		c.v_N[i] = (a.v_N[i] - b.v_N[i] - r + 10) % 10;
+		r = (a.v_N[i] - b.v_N[i] - r) >= 0 ? 0 : 1;
 	}
 	for (i; i < a.getSize(); i++) {
-		c.natural_v[i] = (a.natural_v[i] - r + 10) % 10;
-		r = (a.natural_v[i] - r) >= 0 ? 0 : 1;
+		c.v_N[i] = (a.v_N[i] - r + 10) % 10;
+		r = (a.v_N[i] - r) >= 0 ? 0 : 1;
 	}
-	while ((i > 0) ? (!c.natural_v[i - 1]) : false) {
+	while ((i > 0) ? (!c.v_N[i - 1]) : false) {
 		i--;
 	}
 	if (!i) i++;
@@ -115,13 +115,13 @@ Natural Natural::MUL_ND_N(Natural a, int D) {
 
 	c.resize(a.getSize());
 	for (int j = 0; j < a.vsize; j++) {
-		c.natural_v[j] = (a.natural_v[j] * D + r) % 10;
-		r = (a.natural_v[j] * D + r) / 10;
+		c.v_N[j] = (a.v_N[j] * D + r) % 10;
+		r = (a.v_N[j] * D + r) / 10;
 	}
 	if (r) {
 		c.vsize++;
 		c.resize(c.getSize());
-		c.natural_v[c.vsize - 1] = r;
+		c.v_N[c.vsize - 1] = r;
 	}
 
 	return c;
@@ -132,16 +132,16 @@ Natural Natural::MUL_Nk_N(Natural a, int k) {
 	int r = 0;
 	c.resize(a.getSize() + k);
 	for (int i = a.vsize - 1; i >= 0; i--)
-		c.natural_v[i + k] = a.natural_v[i];
+		c.v_N[i + k] = a.v_N[i];
 	for (int i = 0; i < k; i++)
-		c.natural_v[i] = 0;
+		c.v_N[i] = 0;
 	return c;
 };
 
 Natural Natural::MUL_NN_N(Natural a, Natural b) {
 	Natural c;
 	for (unsigned i = 0; i < b.vsize; i++) {
-		c = ADD_NN_N(c, MUL_Nk_N(MUL_ND_N(a, b.natural_v[i]), i));
+		c = ADD_NN_N(c, MUL_Nk_N(MUL_ND_N(a, b.v_N[i]), i));
 	}
 	return c;
 };
@@ -161,7 +161,7 @@ Natural Natural::DIV_NN_Dk(Natural a, Natural b) {
 		i++;
 	Natural res;
 	res.resize(1);
-	res.natural_v[0] = i;
+	res.v_N[0] = i;
 	return MUL_Nk_N(res, j);
 };
 
