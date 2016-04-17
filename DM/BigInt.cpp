@@ -35,8 +35,8 @@ int BigInt::POZ_Z_D(BigInt x) {
 	if (x.N.getDigit(0) == 0 && x.N.getSize() == 1)
 		return 0;
 	if (x.sign == 0)
-		return 1;
-	return 2;
+		return 2;
+	return 1;
 }
 
 BigInt BigInt::MUL_ZM_Z(BigInt a) {
