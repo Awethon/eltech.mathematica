@@ -6,6 +6,7 @@ BigInt::BigInt() {
 	N.resize(0);
 	sign = 0;
 }
+
 BigInt::BigInt(bool _sign, string kek)
 	: sign(_sign), N(kek) {
 }
@@ -67,18 +68,20 @@ BigInt BigInt::TRANS_N_Z(Natural a) {
 }
 
 BigInt BigInt::ADD_ZZ_Z(BigInt a, BigInt b) {
-	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0) {
-		BigInt result(0, "0");
+	if (POZ_Z_D(a) == POZ_Z_D(b)) {
+		BigInt result(a.getSign(), Natural::ADD_NN_N(a.N, b.N));
 		return result;
 	}
-	if (POZ_Z_D(a) == POZ_Z_D(b))
-	{
-		if (POZ_Z_D(a) == 1)
-			return TRANS_N_Z(Natural::ADD_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
-		return MUL_ZM_Z(TRANS_N_Z((Natural::ADD_NN_N(ABS_Z_N(a), ABS_Z_N(b)))));
+	if (Natural::COM_NN_D(a.N, b.N) == 2) {
+		BigInt result(a.getSign(), Natural::SUB_NN_N(a.N, b.N));
+		return result;
 	}
-	(b.sign == 0) ? b.sign = 1 : b.sign = 0;
-	return SUB_ZZ_Z(a, b);
+	if (Natural::COM_NN_D(a.N, b.N) == 1) {
+		BigInt result(b.getSign(), Natural::SUB_NN_N(b.N, a.N));
+		return result;
+	}
+	BigInt result(0, "0");
+	return result;
 }
 
 BigInt BigInt::SUB_ZZ_Z(BigInt x, BigInt y) {
@@ -148,8 +151,7 @@ BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
 BigInt BigInt::MOD_ZZ_Z(BigInt a, BigInt b) {
 	if (POZ_Z_D(a) == POZ_Z_D(b))
 		return SUB_ZZ_Z(a, MUL_ZZ_Z(DIV_ZZ_Z(a, b), b));
-	if (POZ_Z_D(a) == 2)
-	{
+	if (POZ_Z_D(a) == 2) {
 		BigInt kek(0, TRANS_Z_N(b));
 		return SUB_ZZ_Z(ADD_ZZ_Z(a, kek), MUL_ZZ_Z(DIV_ZZ_Z(a, b), b));
 	}
@@ -164,3 +166,4 @@ BigInt BigInt::MOD_ZZ_Z(BigInt a, BigInt b) {
 //		remainder = SUB_ZZ_Z(a, private_d);
 //		return remainder;
 //}
+

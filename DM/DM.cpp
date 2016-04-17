@@ -61,12 +61,11 @@ void output(Polynom out) {
 	}
 
 int main() {
-	Polynom result;
-	Rational kek(0, "10", "3");
-	Rational lol(0, "2", "3");
-	Polynom lalka(2, "-33/5 1/9 5/4");
-	Polynom lolka(1, "1/9 5/4");
-	result = Polynom::ADD_PP_P(lalka, lolka);
+	BigInt result;
+	BigInt kek(0, "10");
+	BigInt lol(1, "2");
+	result = BigInt::ADD_ZZ_Z(kek, lol);
+
 	output(result);
 	system("pause");
 	return 0;
