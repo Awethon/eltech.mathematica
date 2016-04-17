@@ -63,8 +63,8 @@ void output(Polynom out) {
 int main() {
 	BigInt result;
 	BigInt kek(0, "10");
-	BigInt lol(1, "2");
-	result = BigInt::ADD_ZZ_Z(kek, lol);
+	BigInt lol(1, "3");
+	result = BigInt::MOD_ZZ_Z(kek, lol);
 
 	output(result);
 	system("pause");

@@ -66,13 +66,13 @@ Natural Natural::ADD_NN_N(Natural a, Natural b) {
 
 	if (COM_NN_D(a, b) == 1)
 		swap(a, b);
-	c.resize(a.getSize());
-	for (i = 0; i < b.getSize(); i++) {
+	c.resize(a.vsize);
+	for (i = 0; i < b.vsize; i++) {
 		c.natural_v[i] = (a.natural_v[i] + b.natural_v[i] + r) % 10;
 		r = (a.natural_v[i] + b.natural_v[i] + r) / 10;
 	}
 
-	for (i; i < a.getSize(); i++) {
+	for (i; i < a.vsize; i++) {
 		c.natural_v[i] = (a.natural_v[i] + r) % 10;
 		r = (a.natural_v[i] + r) / 10;
 	}

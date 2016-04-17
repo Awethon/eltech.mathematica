@@ -45,9 +45,8 @@ BigInt BigInt::MUL_ZM_Z(BigInt a) {
 };
 
 BigInt BigInt::MUL_ZZ_Z(BigInt a, BigInt b) {
-	
-	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0)
-	{
+
+	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0) {
 		BigInt result(0, "0");
 		return result;
 	}
@@ -82,43 +81,21 @@ BigInt BigInt::ADD_ZZ_Z(BigInt a, BigInt b) {
 	return result;
 }
 
-BigInt BigInt::SUB_ZZ_Z(BigInt x, BigInt y) {
-	switch (POZ_Z_D(x) + POZ_Z_D(y)) {
-	case 3: // если одно положительное, а другое отрицательное
-		if (POZ_Z_D(x) == 2) // если первое отрицательное
-			return MUL_ZM_Z(TRANS_N_Z(Natural::ADD_NN_N(ABS_Z_N(x), ABS_Z_N(y))));
-		else // если второе отрицательное 
-			return TRANS_N_Z(Natural::ADD_NN_N(ABS_Z_N(x), ABS_Z_N(y)));
-	case 0: //оба ноль
-	case 1: //одно 0 другое положительно
-	case 2: //оба положительные или одно ноль, а второе отрицательное
-		if (POZ_Z_D(x) == 0 || POZ_Z_D(y) == 0) {//если одно равно 0 второе отрицательное или оба равны 0
-			if (POZ_Z_D(x) == 0) {//если первое равно 0
-				if (POZ_Z_D(y) == 0) //и если вдруг второе 0
-					return y;
-				//если только первое 0
-				return (MUL_ZM_Z(y));
-			}
-			//если второе равно 0
-			return x;
-		}
-		// если оба положительные
-		if (Natural::COM_NN_D(ABS_Z_N(x), ABS_Z_N(y)) != 0) { // если по модулю они не равны
-			if (Natural::COM_NN_D(ABS_Z_N(x), ABS_Z_N(y)) == 2) // если по модулю первое больше второго
-				return TRANS_N_Z(Natural::SUB_NN_N(ABS_Z_N(x), ABS_Z_N(y)));
-			// если по модулю второе больше первого
-			return MUL_ZM_Z(TRANS_N_Z(Natural::SUB_NN_N(ABS_Z_N(y), ABS_Z_N(x))));
-		}
-		// если по модулую равны, то выполнитсЯ пункт 4 самое первое
-	case 4: // если оба отрицательные
-		if (Natural::COM_NN_D(ABS_Z_N(x), ABS_Z_N(y)) == 0) // если по модулю они равны
-			return TRANS_N_Z(Natural::SUB_NN_N(ABS_Z_N(x), ABS_Z_N(y)));
-		// если по модулю они не равны
-		if (Natural::COM_NN_D(ABS_Z_N(x), ABS_Z_N(y)) == 2) // если по модулю первое больше второго
-			return MUL_ZM_Z(TRANS_N_Z(Natural::SUB_NN_N(ABS_Z_N(x), ABS_Z_N(y))));
-		// если по модулю второе больше первого
-		return TRANS_N_Z(Natural::SUB_NN_N(ABS_Z_N(y), ABS_Z_N(x)));
+BigInt BigInt::SUB_ZZ_Z(BigInt a, BigInt b) {
+	if (POZ_Z_D(a) != POZ_Z_D(b)) {
+		BigInt result(a.sign, Natural::ADD_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
+		return result;
 	}
+	if (Natural::COM_NN_D(ABS_Z_N(a), ABS_Z_N(b)) == 2) {
+		BigInt result(a.sign, Natural::SUB_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
+		return result;
+	}
+	if (Natural::COM_NN_D(ABS_Z_N(a), ABS_Z_N(b)) == 1) {
+		BigInt result(b.getSign(), Natural::SUB_NN_N(ABS_Z_N(b), ABS_Z_N(a)));
+		return result;
+	}
+	BigInt result(0, "0");
+	return result;
 }
 
 BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
@@ -135,19 +112,5 @@ BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
 BigInt BigInt::MOD_ZZ_Z(BigInt a, BigInt b) {
 	if (POZ_Z_D(a) == POZ_Z_D(b))
 		return SUB_ZZ_Z(a, MUL_ZZ_Z(DIV_ZZ_Z(a, b), b));
-	if (POZ_Z_D(a) == 2) {
-		BigInt kek(0, TRANS_Z_N(b));
-		return SUB_ZZ_Z(ADD_ZZ_Z(a, kek), MUL_ZZ_Z(DIV_ZZ_Z(a, b), b));
-	}
-	exit(-12);
+	return SUB_ZZ_Z(ADD_ZZ_Z(a, b), MUL_ZZ_Z(DIV_ZZ_Z(TRANS_N_Z(a.N), b), b));
 }
-
-//BigInt BigInt::MOD_ZZ_Z(BigInt a, BigInt b) {
-//		BigInt remainder, private_d, inversion;
-//		private_d = DIV_ZZ_Z(a, b);
-//		inversion = MUL_ZM_Z(b);
-//		private_d = MUL_ZZ_Z(private_d, inversion);
-//		remainder = SUB_ZZ_Z(a, private_d);
-//		return remainder;
-//}
-
