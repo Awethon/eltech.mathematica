@@ -44,19 +44,17 @@ BigInt BigInt::MUL_ZM_Z(BigInt a) {
 	return result;
 };
 
-//BigInt BigInt::MUL_ZZ_Z(BigInt a, BigInt b) {
-//	
-//	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0)
-//	{
-//		vector<int> tmpV(1);
-//		BigInt result(0, tmpV);
-//		return result;
-//	}
-//	if (POZ_Z_D(a) == POZ_Z_D(b))
-//		return TRANS_N_Z(MUL_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
-//	else
-//		return MUL_Z__Z(TRANS_N_Z((MUL_NN_N(ABS_Z_N(a), ABS_Z_N(b)))));
-//}
+BigInt BigInt::MUL_ZZ_Z(BigInt a, BigInt b) {
+	
+	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0)
+	{
+		BigInt result(0, "0");
+		return result;
+	}
+	if (POZ_Z_D(a) == POZ_Z_D(b))
+		return TRANS_N_Z(Natural::MUL_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
+	return MUL_ZM_Z(TRANS_N_Z((Natural::MUL_NN_N(ABS_Z_N(a), ABS_Z_N(b)))));
+}
 
 Natural BigInt::TRANS_Z_N(BigInt a) {
 	return a.N;
@@ -121,20 +119,6 @@ BigInt BigInt::SUB_ZZ_Z(BigInt x, BigInt y) {
 		// если по модулю второе больше первого
 		return TRANS_N_Z(Natural::SUB_NN_N(ABS_Z_N(y), ABS_Z_N(x)));
 	}
-}
-
-BigInt BigInt::MUL_ZZ_Z(BigInt x, BigInt y) {
-	BigInt z;
-	if (POZ_Z_D(x) == 0)
-		z = x;
-	else if (POZ_Z_D(y) == 0)
-		z = y;
-	else if (((POZ_Z_D(x) == 2) && (POZ_Z_D(y) == 1)) || ((POZ_Z_D(x) == 1) && (POZ_Z_D(y) == 2)))
-		z = MUL_ZM_Z(TRANS_N_Z(Natural::MUL_NN_N(ABS_Z_N(x), ABS_Z_N(y))));
-	else
-		z = TRANS_N_Z(Natural::MUL_NN_N(ABS_Z_N(x), ABS_Z_N(y)));
-
-	return z;
 }
 
 BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
