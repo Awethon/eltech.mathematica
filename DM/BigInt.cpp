@@ -11,6 +11,16 @@ BigInt::BigInt(bool _sign, string kek)
 	: sign(_sign), N(kek) {
 }
 
+BigInt::BigInt(string strZ) {
+	if (strZ[0] == '-') {
+		sign = 1;
+		N = Natural(strZ.substr(1));
+	} else {
+		sign = 0;
+		N = Natural(strZ);
+	}
+}
+
 BigInt::BigInt(bool _sign, Natural hey_buddy)
 	: sign(_sign), N(hey_buddy) {
 }

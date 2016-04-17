@@ -5,11 +5,11 @@ Natural::Natural() {
 	vsize = 0;
 }
 
-Natural::Natural(string strnum) {
-	vsize = strnum.length();
+Natural::Natural(string strN) {
+	vsize = strN.length();
 	v_N.resize(vsize);
 	for (unsigned int i = 0; i < vsize; i++) {
-		v_N.at(vsize - 1 - i) = strnum[i] - 48;
+		v_N.at(vsize - 1 - i) = strN[i] - 48;
 	}
 }
 

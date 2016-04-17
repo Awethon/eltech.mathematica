@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <iostream>
 #include "Rational.h"
 
 Rational::Rational()
@@ -52,10 +53,10 @@ Rational Rational::TRANS_Z_Q(BigInt a) {
 	return Q;
 };
 BigInt Rational::TRANS_Q_Z(Rational a) {
-	if (a.Z.getSign() == 1)
-		exit(133);
-	else
-		return a.Z;
+	if (!(a.N.getDigit(0) == 1 && a.N.getSize() == 1)) {
+		//› —≈œÿŒÕ
+	}
+	return a.Z;
 };
 
 Rational Rational::ADD_QQ_Q(Rational q1, Rational q2) {

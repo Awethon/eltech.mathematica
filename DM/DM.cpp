@@ -61,10 +61,10 @@ void output(Polynom out) {
 	}
 
 int main() {
-	BigInt result;
-	BigInt kek(0, "10");
-	BigInt lol(1, "3");
-	result = BigInt::MOD_ZZ_Z(kek, lol);
+	Rational result;
+	Rational kek(0, "10", "3");
+	Rational lol(1, "3", "2");
+	result = Rational::ADD_QQ_Q(kek, lol);
 
 	output(result);
 	system("pause");
