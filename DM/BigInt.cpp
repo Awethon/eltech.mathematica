@@ -111,8 +111,7 @@ BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
 	}
 	if (POZ_Z_D(a) == POZ_Z_D(b))
 		return TRANS_N_Z(Natural::DIV_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
-	else
-		return MUL_ZM_Z(TRANS_N_Z(Natural::DIV_NN_N(ABS_Z_N(a), ABS_Z_N(b))));
+	return MUL_ZM_Z(TRANS_N_Z(Natural::DIV_NN_N(ABS_Z_N(a), ABS_Z_N(b))));
 }
 
 BigInt BigInt::MOD_ZZ_Z(BigInt a, BigInt b) {
