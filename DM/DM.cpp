@@ -61,11 +61,11 @@ void output(Polynom out) {
 	}
 
 int main() {
-	Polynom result;
-	Polynom kek(2, "10/3 3/2 1/4");
-	result = Polynom::MUL_Pxk_P(kek, 3);
-
-	output(result);
+	bool result;
+	Rational kek(0, "10", "4");
+	result = Rational::INT_Q_B(kek);
+	cout << result;
+	//output(result);
 	system("pause");
 	return 0;
 }

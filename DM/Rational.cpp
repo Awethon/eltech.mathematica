@@ -43,7 +43,7 @@ Rational Rational::RED_Q_Q(Rational A) {
 
 bool Rational::INT_Q_B(Rational a) {
 	if (Natural::COM_NN_D(BigInt::ABS_Z_N(a.Z), a.N) == 2 || Natural::COM_NN_D(BigInt::ABS_Z_N(a.Z), a.N) == 0)
-		if (Natural::NZER_N_B(Natural::MOD_NN_N(BigInt::ABS_Z_N(a.Z), a.N)))
+		if (!Natural::NZER_N_B(Natural::MOD_NN_N(BigInt::ABS_Z_N(a.Z), a.N)))
 			return true;
 	return false;
 };
