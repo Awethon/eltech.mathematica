@@ -14,34 +14,34 @@ Rational::Rational(bool sign, string str_Z, string str_N)
 	: Z(sign, str_Z), N(str_N) {
 }
 
-unsigned int Rational::getSize_Z() {
+unsigned int Rational::getSize_Z() const{
 	return Z.getSize();
 }
 
-unsigned int Rational::getSize_N() {
+unsigned int Rational::getSize_N() const {
 	return N.getSize();
 }
 
-unsigned Rational::getDigit_Z(unsigned rank) {
+unsigned Rational::getDigit_Z(unsigned rank) const {
 	return Z.getDigit(rank);
 }
 
-unsigned int Rational::getDigit_N(unsigned rank) {
+unsigned Rational::getDigit_N(unsigned rank) const {
 	return N.getDigit(rank);
 }
 
-bool Rational::getSign_Q() {
+bool Rational::getSign_Q() const{
 	return Z.getSign();
 }
 
-Rational Rational::RED_Q_Q(Rational A) {
+Rational Rational::RED_Q_Q(const Rational &A) {
 	BigInt Z = BigInt::DIV_ZZ_Z(A.Z, BigInt::TRANS_N_Z(Natural::GCF_NN_N(BigInt::TRANS_Z_N(A.Z), A.N)));
 	Natural N = Natural::DIV_NN_N(A.N, Natural::GCF_NN_N(BigInt::TRANS_Z_N(A.Z), A.N));
 	Rational result(Z, N);
 	return result;
 };
 
-bool Rational::INT_Q_B(Rational a) {
+bool Rational::INT_Q_B(const Rational& a) {
 	if (Natural::COM_NN_D(BigInt::ABS_Z_N(a.Z), a.N) == 2 || Natural::COM_NN_D(BigInt::ABS_Z_N(a.Z), a.N) == 0)
 		if (!Natural::NZER_N_B(Natural::MOD_NN_N(BigInt::ABS_Z_N(a.Z), a.N))) {
 			return true;
@@ -49,19 +49,19 @@ bool Rational::INT_Q_B(Rational a) {
 	return false;
 };
 
-Rational Rational::TRANS_Z_Q(BigInt a) {
+Rational Rational::TRANS_Z_Q(const BigInt &a) {
 	Natural N("1");
 	Rational Q(a, N);
 	return Q;
 };
-BigInt Rational::TRANS_Q_Z(Rational a) {
+BigInt Rational::TRANS_Q_Z(const Rational &a) {
 	if (!(a.N.getDigit(0) == 1 && a.N.getSize() == 1)) {
 		//› —≈œÿŒÕ
 	}
 	return a.Z;
 };
 
-Rational Rational::ADD_QQ_Q(Rational q1, Rational q2) {
+Rational Rational::ADD_QQ_Q(const Rational &q1, const Rational &q2) {
 	Rational add;
 	add.N = Natural::LCM_NN_N(q1.N, q2.N);
 
@@ -77,7 +77,7 @@ Rational Rational::ADD_QQ_Q(Rational q1, Rational q2) {
 	return RED_Q_Q(add);
 };
 
-Rational Rational::SUB_QQ_Q(Rational q1, Rational q2) {
+Rational Rational::SUB_QQ_Q(const Rational &q1, const Rational &q2) {
 	Rational sub;
 	sub.N = Natural::LCM_NN_N(q1.N, q2.N);
 
@@ -93,12 +93,12 @@ Rational Rational::SUB_QQ_Q(Rational q1, Rational q2) {
 	return RED_Q_Q(sub);
 };
 
-Rational Rational::MUL_QQ_Q(Rational q1, Rational q2) {
+Rational Rational::MUL_QQ_Q(const Rational &q1, const Rational &q2) {
 	Rational result(BigInt::MUL_ZZ_Z(q1.Z, q2.Z), Natural::MUL_NN_N(q1.N, q2.N));
 	return RED_Q_Q(result);
 };
 
-Rational Rational::DIV_QQ_Q(Rational a, Rational c) {
+Rational Rational::DIV_QQ_Q(const Rational &a, const Rational &c) {
 	if (a.Z.getSign() != c.Z.getSign()) {
 		Rational result(BigInt::MUL_ZM_Z(BigInt::MUL_ZZ_Z(a.Z, BigInt::TRANS_N_Z(c.N))), Natural::MUL_NN_N(a.N, BigInt::TRANS_Z_N(c.Z)));
 		return RED_Q_Q(result);

@@ -13,23 +13,23 @@ Natural::Natural(string strN) {
 	}
 }
 
-unsigned short Natural::getDigit(unsigned rank) {
+unsigned short Natural::getDigit(unsigned long long rank) const{
 	if (rank >= 0 && rank < vsize) {
 		return v_N[rank];
 	}
 	exit(-1);
 };
 
-unsigned int Natural::getSize() {
+unsigned long long Natural::getSize() const{
 	return vsize;
 };
 
-void Natural::resize(unsigned newSize) {
+void Natural::resize(unsigned long long newSize) {
 	v_N.resize(newSize);
 	vsize = newSize;
 }
 
-int Natural::COM_NN_D(Natural a, Natural b) {
+int Natural::COM_NN_D(const Natural& a, const Natural& b) {
 	if (a.vsize > b.vsize)
 		return 2;
 	if (a.vsize < b.vsize)
@@ -58,18 +58,6 @@ Natural Natural::ADD_1N_N(Natural a) {
 	a.v_N[i]++;
 	return a;
 };
-
-//Natural Natural::ADD_1N_N(Natural &a) {
-//	int i;
-//	for (i = 0; (i < a.vsize) ? (a.v_N[i] == 9 ? true : false) : false; i++);
-//
-//	if (i == a.vsize)
-//		a.resize(a.vsize + 1);
-//	for (int j = 0; j < i; j++)
-//		a.v_N[j] = 0;
-//	a.v_N[i]++;
-//	return a;
-//};
 
 Natural Natural::ADD_NN_N(Natural a, Natural b) {
 	Natural c;
@@ -100,7 +88,7 @@ Natural Natural::SUB_NN_N(Natural a, Natural b) {
 	Natural c;
 	int i = 0;
 	int r = 0;
-
+	//swap? EXCEPTION!111
 	if (COM_NN_D(a, b) == 1)
 		swap(a, b);
 	c.resize(a.getSize());
@@ -121,7 +109,7 @@ Natural Natural::SUB_NN_N(Natural a, Natural b) {
 	return c;
 };
 
-Natural Natural::MUL_ND_N(Natural a, int D) {
+Natural Natural::MUL_ND_N(const Natural &a, int D) {
 	Natural c;
 	int r = 0;
 
@@ -139,7 +127,7 @@ Natural Natural::MUL_ND_N(Natural a, int D) {
 	return c;
 };
 
-Natural Natural::MUL_Nk_N(Natural a, int k) {
+Natural Natural::MUL_Nk_N(const Natural &a, int k) {
 	Natural c;
 	int r = 0;
 	c.resize(a.getSize() + k);
@@ -150,7 +138,7 @@ Natural Natural::MUL_Nk_N(Natural a, int k) {
 	return c;
 };
 
-Natural Natural::MUL_NN_N(Natural a, Natural b) {
+Natural Natural::MUL_NN_N(const Natural &a, const Natural &b) {
 	Natural c;
 	for (unsigned i = 0; i < b.vsize; i++) {
 		c = ADD_NN_N(c, MUL_Nk_N(MUL_ND_N(a, b.v_N[i]), i));
@@ -158,12 +146,13 @@ Natural Natural::MUL_NN_N(Natural a, Natural b) {
 	return c;
 };
 
-Natural Natural::SUB_NDN_N(Natural a, int n, Natural b) {
-	return (SUB_NN_N(a, MUL_ND_N(b, n)));
+Natural Natural::SUB_NDN_N(const Natural &a, int n, const Natural &b) {
+	return SUB_NN_N(a, MUL_ND_N(b, n));
 };
 
-Natural Natural::DIV_NN_Dk(Natural a, Natural b) {
+Natural Natural::DIV_NN_Dk(const Natural &a, const Natural &b) {
 	Natural x = b;
+	//add check for a > b
 	int j = a.vsize - b.vsize - 1;
 	if (COM_NN_D(a, MUL_Nk_N(x, j + 1)) != 1)
 		j++;
@@ -177,7 +166,7 @@ Natural Natural::DIV_NN_Dk(Natural a, Natural b) {
 	return MUL_Nk_N(res, j);
 };
 
-Natural Natural::DIV_NN_N(Natural a, Natural b) {
+Natural Natural::DIV_NN_N(const Natural &a, const Natural &b) {
 	Natural res("0");
 	Natural sub;
 	Natural c = a;
@@ -189,7 +178,7 @@ Natural Natural::DIV_NN_N(Natural a, Natural b) {
 	return res;
 };
 
-Natural Natural::MOD_NN_N(Natural a, Natural b) {
+Natural Natural::MOD_NN_N(const Natural &a, const Natural &b) {
 	return SUB_NN_N(a, MUL_NN_N(b, DIV_NN_N(a, b)));
 };
 
@@ -210,6 +199,6 @@ Natural Natural::GCF_NN_N(Natural a, Natural b) {
 	}
 };
 
-Natural Natural::LCM_NN_N(Natural a, Natural b) {
+Natural Natural::LCM_NN_N(const Natural &a, const Natural &b) {
 	return DIV_NN_N(MUL_NN_N(a, b), GCF_NN_N(a, b));
 };

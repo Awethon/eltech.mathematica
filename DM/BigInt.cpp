@@ -29,19 +29,19 @@ bool BigInt::getSign() const {
 	return sign;
 }
 
-unsigned short BigInt::getDigit(unsigned int rank) {
+unsigned short BigInt::getDigit(unsigned long long rank) const {
 	return N.getDigit(rank);
 }
 
-int BigInt::getSize() {
+int BigInt::getSize() const {
 	return N.getSize();
 }
 
-Natural BigInt::ABS_Z_N(BigInt a) {
+Natural BigInt::ABS_Z_N(const BigInt &a) {
 	return a.N;
 }
 
-int BigInt::POZ_Z_D(BigInt x) {
+int BigInt::POZ_Z_D(const BigInt &x) {
 	if (x.N.getDigit(0) == 0 && x.N.getSize() == 1)
 		return 0;
 	if (x.sign == 0)
@@ -49,18 +49,18 @@ int BigInt::POZ_Z_D(BigInt x) {
 	return 1;
 }
 
-int BigInt::COM_ZZ_D(BigInt a, BigInt b) {
+int BigInt::COM_ZZ_D(const BigInt& a, const BigInt& b) {
 	if (POZ_Z_D(a) == POZ_Z_D(b))
 		return Natural::COM_NN_D(a.N, b.N);
 	return POZ_Z_D(a) == 2 ? 2 : 1;
 }
 
-BigInt BigInt::MUL_ZM_Z(BigInt a) {
+BigInt BigInt::MUL_ZM_Z(const BigInt &a) {
 	BigInt result((a.sign == 0) ? 1 : 0, a.N);
 	return result;
 };
 
-BigInt BigInt::MUL_ZZ_Z(BigInt a, BigInt b) {
+BigInt BigInt::MUL_ZZ_Z(const BigInt &a, const BigInt &b) {
 
 	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0) {
 		BigInt result("0");
@@ -71,16 +71,16 @@ BigInt BigInt::MUL_ZZ_Z(BigInt a, BigInt b) {
 	return MUL_ZM_Z(TRANS_N_Z((Natural::MUL_NN_N(ABS_Z_N(a), ABS_Z_N(b)))));
 }
 
-Natural BigInt::TRANS_Z_N(BigInt a) {
+Natural BigInt::TRANS_Z_N(const BigInt &a) {
 	return a.N;
 }
 
-BigInt BigInt::TRANS_N_Z(Natural a) {
+BigInt BigInt::TRANS_N_Z(const Natural &a) {
 	BigInt b(0, a);
 	return b;
 }
 
-BigInt BigInt::ADD_ZZ_Z(BigInt a, BigInt b) {
+BigInt BigInt::ADD_ZZ_Z(const BigInt &a, const BigInt &b) {
 	if (POZ_Z_D(a) == POZ_Z_D(b)) {
 		BigInt result(a.getSign(), Natural::ADD_NN_N(a.N, b.N));
 		return result;
@@ -97,7 +97,7 @@ BigInt BigInt::ADD_ZZ_Z(BigInt a, BigInt b) {
 	return result;
 }
 
-BigInt BigInt::SUB_ZZ_Z(BigInt a, BigInt b) {
+BigInt BigInt::SUB_ZZ_Z(const BigInt &a, const BigInt &b) {
 	if (POZ_Z_D(a) != POZ_Z_D(b)) {
 		BigInt result(a.sign, Natural::ADD_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
 		return result;
@@ -114,7 +114,7 @@ BigInt BigInt::SUB_ZZ_Z(BigInt a, BigInt b) {
 	return result;
 }
 
-BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
+BigInt BigInt::DIV_ZZ_Z(const BigInt &a, const BigInt &b) {
 	if (POZ_Z_D(a) == 0 || POZ_Z_D(b) == 0) {
 		BigInt result("0");
 		return result;
@@ -124,7 +124,7 @@ BigInt BigInt::DIV_ZZ_Z(BigInt a, BigInt b) {
 	return MUL_ZM_Z(TRANS_N_Z(Natural::DIV_NN_N(ABS_Z_N(a), ABS_Z_N(b))));
 }
 
-BigInt BigInt::MOD_ZZ_Z(BigInt a, BigInt b) {
+BigInt BigInt::MOD_ZZ_Z(const BigInt &a, const BigInt &b) {
 	if (POZ_Z_D(a) == POZ_Z_D(b))
 		return SUB_ZZ_Z(a, MUL_ZZ_Z(DIV_ZZ_Z(a, b), b));
 	return SUB_ZZ_Z(ADD_ZZ_Z(a, b), MUL_ZZ_Z(DIV_ZZ_Z(TRANS_N_Z(a.N), b), b));

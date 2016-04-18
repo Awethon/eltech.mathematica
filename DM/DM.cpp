@@ -62,39 +62,28 @@ void output(Polynom out) {
 	}
 
 int main() {
-	bool result;
+	Rational result;
 	{
 		unsigned int start_time = clock();
-		Natural kek("35809438593485");
-		for (int i = 0; i < 10000; i++) {
-			Natural::ADD_1N_N(kek);
+		Rational kek(0, "358094385937765785", "25");
+		for (int i = 0; i < 20; i++) {
+			result = Rational::RED_Q_Q(kek);
+			output(result);
 		}
 		unsigned int end_time = clock(); // конечное время
 		unsigned int search_time = end_time - start_time; // искомое время
-		cout << search_time << '\n';
-		output(kek);
+		cout << '\n' << search_time << '\n';
 	}
 	{
 		unsigned int start_time = clock();
-		Natural kek("35809438593485");
-		for (int i = 0; i < 10000; i++) {
-			Natural::ADD_1N_N(kek);
+		Rational lol(0, "3580967385", "25");
+		for (int i = 0; i < 20; i++) {
+			result = Rational::RED_Q_Q(lol);
+			output(result);
 		}
 		unsigned int end_time = clock(); // конечное время
 		unsigned int search_time = end_time - start_time; // искомое время
-		cout << search_time << '\n';
-		output(kek);
-	}
-	{
-		unsigned int start_time = clock();
-		Natural kek("35809438593485");
-		for (int i = 0; i < 10000; i++) {
-			Natural::ADD_1N_N(kek);
-		}
-		unsigned int end_time = clock(); // конечное время
-		unsigned int search_time = end_time - start_time; // искомое время
-		cout << search_time << '\n';
-		output(kek);
+		cout << '\n' << search_time << '\n';
 	}
 	system("pause");
 	return 0;
