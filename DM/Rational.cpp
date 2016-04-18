@@ -22,11 +22,11 @@ unsigned int Rational::getSize_N() {
 	return N.getSize();
 }
 
-unsigned int Rational::getDigit_Z(int rank) {
+unsigned Rational::getDigit_Z(unsigned rank) {
 	return Z.getDigit(rank);
 }
 
-unsigned int Rational::getDigit_N(int rank) {
+unsigned int Rational::getDigit_N(unsigned rank) {
 	return N.getDigit(rank);
 }
 
@@ -43,10 +43,12 @@ Rational Rational::RED_Q_Q(Rational A) {
 
 bool Rational::INT_Q_B(Rational a) {
 	if (Natural::COM_NN_D(BigInt::ABS_Z_N(a.Z), a.N) == 2 || Natural::COM_NN_D(BigInt::ABS_Z_N(a.Z), a.N) == 0)
-		if (!Natural::NZER_N_B(Natural::MOD_NN_N(BigInt::ABS_Z_N(a.Z), a.N)))
+		if (!Natural::NZER_N_B(Natural::MOD_NN_N(BigInt::ABS_Z_N(a.Z), a.N))) {
 			return true;
+		}
 	return false;
 };
+
 Rational Rational::TRANS_Z_Q(BigInt a) {
 	Natural N("1");
 	Rational Q(a, N);

@@ -13,7 +13,7 @@ Natural::Natural(string strN) {
 	}
 }
 
-unsigned short Natural::getDigit(unsigned int rank) {
+unsigned short Natural::getDigit(unsigned rank) {
 	if (rank >= 0 && rank < vsize) {
 		return v_N[rank];
 	}
@@ -24,7 +24,7 @@ unsigned int Natural::getSize() {
 	return vsize;
 };
 
-void Natural::resize(unsigned int newSize) {
+void Natural::resize(unsigned newSize) {
 	v_N.resize(newSize);
 	vsize = newSize;
 }
@@ -43,7 +43,7 @@ int Natural::COM_NN_D(Natural a, Natural b) {
 	return 0;
 }
 
-bool Natural::NZER_N_B(Natural a) {
+bool Natural::NZER_N_B(const Natural &a) {
 	return (a.vsize == 1 && a.v_N[0] == 0) ? false : true;
 };
 
@@ -58,6 +58,18 @@ Natural Natural::ADD_1N_N(Natural a) {
 	a.v_N[i]++;
 	return a;
 };
+
+//Natural Natural::ADD_1N_N(Natural &a) {
+//	int i;
+//	for (i = 0; (i < a.vsize) ? (a.v_N[i] == 9 ? true : false) : false; i++);
+//
+//	if (i == a.vsize)
+//		a.resize(a.vsize + 1);
+//	for (int j = 0; j < i; j++)
+//		a.v_N[j] = 0;
+//	a.v_N[i]++;
+//	return a;
+//};
 
 Natural Natural::ADD_NN_N(Natural a, Natural b) {
 	Natural c;

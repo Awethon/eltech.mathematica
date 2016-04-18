@@ -20,9 +20,9 @@ public:
 
 	unsigned int getSize_N();
 
-	unsigned int getDigit_Z(int);
+	unsigned getDigit_Z(unsigned);
 
-	unsigned int getDigit_N(int);
+	unsigned getDigit_N(unsigned);
 
 	bool getSign_Q();
 

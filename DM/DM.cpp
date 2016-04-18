@@ -5,6 +5,7 @@
 #include "Natural.h"
 #include "Rational.h"
 #include "Polynom.h"
+#include "ctime"
 #include <iostream>
 
 void output(Natural out) {
@@ -62,10 +63,39 @@ void output(Polynom out) {
 
 int main() {
 	bool result;
-	Rational kek(0, "10", "4");
-	result = Rational::INT_Q_B(kek);
-	cout << result;
-	//output(result);
+	{
+		unsigned int start_time = clock();
+		Natural kek("35809438593485");
+		for (int i = 0; i < 10000; i++) {
+			Natural::ADD_1N_N(kek);
+		}
+		unsigned int end_time = clock(); // конечное время
+		unsigned int search_time = end_time - start_time; // искомое время
+		cout << search_time << '\n';
+		output(kek);
+	}
+	{
+		unsigned int start_time = clock();
+		Natural kek("35809438593485");
+		for (int i = 0; i < 10000; i++) {
+			Natural::ADD_1N_N(kek);
+		}
+		unsigned int end_time = clock(); // конечное время
+		unsigned int search_time = end_time - start_time; // искомое время
+		cout << search_time << '\n';
+		output(kek);
+	}
+	{
+		unsigned int start_time = clock();
+		Natural kek("35809438593485");
+		for (int i = 0; i < 10000; i++) {
+			Natural::ADD_1N_N(kek);
+		}
+		unsigned int end_time = clock(); // конечное время
+		unsigned int search_time = end_time - start_time; // искомое время
+		cout << search_time << '\n';
+		output(kek);
+	}
 	system("pause");
 	return 0;
 }

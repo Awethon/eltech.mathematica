@@ -12,17 +12,19 @@ public:
 
 	Natural(string);
 
-	unsigned short getDigit(unsigned int);
+	unsigned short getDigit(unsigned);
 
 	unsigned int getSize();
 
-	void resize(unsigned int);
+	void resize(unsigned);
 
 	static int COM_NN_D(Natural, Natural);
 
-	static bool NZER_N_B(Natural);
+	static bool NZER_N_B(const Natural&);
 
 	static Natural ADD_1N_N(Natural);
+
+	//static Natural ADD_1N_N(Natural&);
 
 	static Natural ADD_NN_N(Natural, Natural);
 
