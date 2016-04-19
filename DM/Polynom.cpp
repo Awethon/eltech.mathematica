@@ -181,6 +181,6 @@ Polynom Polynom::DER_P_P(Polynom a) {
 };
 
 //Polynom Polynom::NMR_P_P(Polynom) {
-//	
+//	return DIV_PP_P(pNum, GFC_PP_P(pNum, DER_P_P(pNum)));
 //};
 
