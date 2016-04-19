@@ -5,7 +5,7 @@ using namespace std;
 class Natural {
 protected:
 	vector<int8_t> v_N;
-	unsigned int vsize;
+	unsigned long long vsize;
 public:
 	Natural();
 	Natural(string);

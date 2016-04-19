@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FNum.h" />
     <ClInclude Include="Polynom.h" />
     <ClInclude Include="Rational.h" />
     <ClInclude Include="BigInt.h" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="BigInt.cpp" />
     <ClCompile Include="DM.cpp" />
+    <ClCompile Include="FNum.cpp" />
     <ClCompile Include="Natural.cpp" />
     <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="Rational.cpp" />
