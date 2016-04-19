@@ -7,6 +7,12 @@
 #include "Polynom.h"
 #include "ctime"
 #include <iostream>
+#include <stdint.h>
+#include <iostream>
+#include <cstdlib>
+#include <primesieve.hpp>
+
+using namespace std;
 
 void output(Natural out) {
 	for (int i = out.getSize() - 1; i >= 0; i--) {
@@ -61,30 +67,20 @@ void output(Polynom out) {
 	}
 	}
 
-int main() {
-	Rational result;
-	{
-		unsigned int start_time = clock();
-		Rational kek(0, "358094385937765785", "25");
-		for (int i = 0; i < 20; i++) {
-			result = Rational::RED_Q_Q(kek);
-			output(result);
-		}
-		unsigned int end_time = clock(); // конечное время
-		unsigned int search_time = end_time - start_time; // искомое время
-		cout << '\n' << search_time << '\n';
-	}
-	{
-		unsigned int start_time = clock();
-		Rational lol(0, "3580967385", "25");
-		for (int i = 0; i < 20; i++) {
-			result = Rational::RED_Q_Q(lol);
-			output(result);
-		}
-		unsigned int end_time = clock(); // конечное время
-		unsigned int search_time = end_time - start_time; // искомое время
-		cout << '\n' << search_time << '\n';
-	}
+int main(int argc, char *argv[])
+{
+	uint64_t n = 1000000;
+	if (argv[1])
+		n = std::atol(argv[1]);
+
+	uint64_t nth_prime = primesieve::nth_prime(n);
+	std::cout << n << "th prime = " << nth_prime << std::endl;
 	system("pause");
 	return 0;
 }
+
+//int main() {
+//	Rational result;
+//	system("pause");
+//	return 0;
+//}

@@ -3,10 +3,12 @@
 
 
 FNum::FNum()
+	:n(0)
 {
 }
 
-
-FNum::~FNum()
+FNum::FNum(unsigned int n)
+	:n(n)
 {
+	k.resize(n - 2);
 }
