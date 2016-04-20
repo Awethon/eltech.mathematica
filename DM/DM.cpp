@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 	//uint64_t nth_prime = primesieve::parallel_nth_prime(n);
 	//std::cout << n << "th prime = " << nth_prime << std::endl;
 
-	Crypto lol(97, 101);
+	Crypto lol(102539, 102547);
 	vector<uint64_t> kek = lol.encrypt("LIFE");
 	string heh = lol.decrypt(kek);
 	cout << heh;

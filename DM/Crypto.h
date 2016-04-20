@@ -16,5 +16,6 @@ public:
 
 	vector<uint64_t> encrypt(string);
 	string decrypt(vector<uint64_t>);
+	//uint64_t
 };
 
