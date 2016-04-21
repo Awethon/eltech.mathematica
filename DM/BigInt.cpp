@@ -85,11 +85,11 @@ BigInt BigInt::ADD_ZZ_Z(const BigInt &a, const BigInt &b) {
 		BigInt result(a.getSign(), Natural::ADD_NN_N(a.N, b.N));
 		return result;
 	}
-	if (COM_ZZ_D(a, b) == 2) {
+	if (Natural::COM_NN_D(TRANS_Z_N(a), TRANS_Z_N(b)) == 2) {
 		BigInt result(a.getSign(), Natural::SUB_NN_N(a.N, b.N));
 		return result;
 	}
-	if (COM_ZZ_D(a, b) == 1) {
+	if (Natural::COM_NN_D(TRANS_Z_N(a), TRANS_Z_N(b)) == 1) {
 		BigInt result(b.getSign(), Natural::SUB_NN_N(b.N, a.N));
 		return result;
 	}
@@ -102,11 +102,11 @@ BigInt BigInt::SUB_ZZ_Z(const BigInt &a, const BigInt &b) {
 		BigInt result(a.sign, Natural::ADD_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
 		return result;
 	}
-	if (COM_ZZ_D(a, b) == 2) {
+	if (Natural::COM_NN_D(TRANS_Z_N(a), TRANS_Z_N(b)) == 2) {
 		BigInt result(a.sign, Natural::SUB_NN_N(ABS_Z_N(a), ABS_Z_N(b)));
 		return result;
 	}
-	if (COM_ZZ_D(a, b) == 1) {
+	if (Natural::COM_NN_D(TRANS_Z_N(a), TRANS_Z_N(b)) == 1) {
 		BigInt result(b.getSign(), Natural::SUB_NN_N(ABS_Z_N(b), ABS_Z_N(a)));
 		return result;
 	}
