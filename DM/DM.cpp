@@ -76,10 +76,10 @@ int main(int argc, char *argv[])
 
 	//uint64_t nth_prime = primesieve::parallel_nth_prime(n);
 	//std::cout << n << "th prime = " << nth_prime << std::endl;
-
-	Crypto lol(102539, 102547);
+	//prime numbers  < 18315
+	Crypto lol(18311, 18313);
 	vector<uint64_t> kek = lol.encrypt("LIFE");
-	string heh = lol.decrypt(kek);
+	string heh = lol.hack(kek);
 	cout << heh;
 	unsigned int end_time = clock();
 	unsigned int search_time = end_time - start_time;

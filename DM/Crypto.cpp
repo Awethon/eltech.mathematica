@@ -2,24 +2,6 @@
 #include "Crypto.h"
 #include <iostream>
 
-//uint32_t modpow_expsqr(uint32_t b, uint32_t X, uint64_t M)
-//{
-//	uint64_t B = b;
-//	uint64_t P = 1;
-//
-//	while (X != 0)
-//	{
-//		if ((X & 1) == 1)
-//		{
-//			P = (P * B) % M;
-//		}
-//		B = (B * B) % M;
-//		X >>= 1;
-//	}
-//
-//	return (uint32_t)P;
-//}
-
 uint64_t gcd(uint64_t a, uint64_t b) {
 	return b ? gcd(b, a % b) : a;
 }
@@ -56,19 +38,22 @@ uint64_t inverse(uint64_t a, uint64_t n)
 	return 0;
 }
 
-uint64_t modpow_expsqr(uint64_t x, uint64_t e, uint64_t M)
+uint64_t modpow_expsqr(uint64_t x, uint64_t e, uint32_t M)
 {
-	uint64_t r = 1;
-	while (e > 0)
+	uint64_t B = x;
+	uint64_t P = 1;
+
+	while (e != 0)
 	{
-		if ((e % 2) == 1)
+		if ((e & 1) == 1)
 		{
-			r = (r * x) % M;
+			P = (P * B) % M;
 		}
-		e /= 2;
-		x = (x * x) % M;
+		B = (B * B) % M;
+		e >>= 1;
 	}
-	return r;
+
+	return P;
 }
 
 Crypto::Crypto(uint64_t p, uint64_t q)
@@ -98,4 +83,43 @@ string Crypto::decrypt(vector<uint64_t> encrypt) {
 		crypt[i] = modpow_expsqr(encrypt[i], d, m);
 	}
 	return crypt;
+}
+
+string Crypto::hack(vector<uint64_t> encrypt) {
+	string crypt;
+	crypt.resize(encrypt.size());
+	int j = 1;
+	uint64_t CC = encrypt[0];
+	while (modpow_expsqr(CC, e, m) != encrypt[0]) {
+		CC = modpow_expsqr(CC, e, m);
+		j++;
+		cout << j << '\n';
+	}
+
+	for (int i = 0; i < crypt.length(); i++)
+	{
+		CC = encrypt[i];
+		for (int k = 1; k < j; k++) {
+			CC = modpow_expsqr(CC, e, m);
+		}
+		crypt[i] = CC;
+	}
+	return crypt;
+}
+
+vector<uint64_t> Crypto::sign(string str) {
+	vector<uint64_t> crypt;
+	crypt.resize(str.length());
+	for (int i = 0; i < str.length(); i++) {
+		crypt[i] = modpow_expsqr(str[i], d, m);
+	}
+	return crypt;
+}
+
+unsigned Crypto::get_e() {
+	return e;
+}
+
+unsigned long Crypto::get_m() {
+	return m;
 }
