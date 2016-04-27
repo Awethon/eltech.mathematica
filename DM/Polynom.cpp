@@ -73,7 +73,7 @@ Polynom Polynom::ADD_PP_P(Polynom p1, Polynom p2) {
 	Polynom result(p1.n > p2.n ? p1.n : p2.n);
 	unsigned lesser_p = p1.n > p2.n ? p2.n : p1.n;
 	for (int i = result.n; i >= lesser_p; i--) {
-		result.v_Q[i] = (p1.n > p2.n ? p1 : p2).getQ(i);
+		result.v_Q[i] = Rational::RED_Q_Q((p1.n > p2.n ? p1 : p2).getQ(i));
 	}
 	for (int i = 0; i <= lesser_p; i++) {
 		result.v_Q[i] = Rational::RED_Q_Q(Rational::ADD_QQ_Q(p1.v_Q[i], p2.v_Q[i]));
@@ -81,12 +81,16 @@ Polynom Polynom::ADD_PP_P(Polynom p1, Polynom p2) {
 	return result;
 }
 
-Polynom Polynom::SUB_PP_P(Polynom f, Polynom g) {
-	Polynom p(f.n > g.n ? f.n : g.n);
-	int i;
-	for (i = 0 , p.n = 0; (i < f.n || i < g.n); i++ , p.n++)
-		p.v_Q[i] = Rational::SUB_QQ_Q(f.v_Q[i], g.v_Q[i]);
-	return p;
+Polynom Polynom::SUB_PP_P(Polynom p1, Polynom p2) {
+	Polynom result(p1.n > p2.n ? p1.n : p2.n);
+	unsigned lesser_p = p1.n > p2.n ? p2.n : p1.n;
+	for (int i = result.n; i >= lesser_p; i--) {
+		result.v_Q[i] = Rational::RED_Q_Q((p1.n > p2.n ? p1 : p2).getQ(i));
+	}
+	for (int i = 0; i <= lesser_p; i++) {
+		result.v_Q[i] = Rational::RED_Q_Q(Rational::SUB_QQ_Q(p1.v_Q[i], p2.v_Q[i]));
+	}
+	return result;
 };
 
 Polynom Polynom::MUL_PQ_P(Polynom A, Rational Q) {

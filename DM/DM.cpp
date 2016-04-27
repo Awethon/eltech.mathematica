@@ -82,13 +82,9 @@ int main(int argc, char *argv[])
 	//vector<uint64_t> kek = lol.encrypt("LIFE");
 	//string heh = lol.hack(kek);
 	//cout << heh;
-	//Polynom lol(3, "33/6 3/6 7/3 2/3");;
-	//Polynom kek(2, "15/4 -11/3 5/1");
-	//Polynom result = Polynom::ADD_PP_P(lol, kek);
-	//output(result);
-	Rational lol(0, "7", "3");
-	Rational kek(1, "11", "3");
-	Rational result = Rational::ADD_QQ_Q(lol, kek);
+	Polynom lol(3, "33/6 3/6 7/3 2/3");;
+	Polynom kek(2, "15/4 -11/3 5/1");
+	Polynom result = Polynom::ADD_PP_P(lol, kek);
 	output(result);
 	unsigned int end_time = clock();
 	unsigned int search_time = end_time - start_time;
