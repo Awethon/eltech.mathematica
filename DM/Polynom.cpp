@@ -94,7 +94,7 @@ Polynom Polynom::SUB_PP_P(Polynom p1, Polynom p2) {
 };
 
 Polynom Polynom::MUL_PQ_P(Polynom A, Rational Q) {
-	for (int i = 0; i < A.n; i++) {
+	for (int i = 0; i <= A.n; i++) {
 		A.v_Q[i] = Rational::MUL_QQ_Q(A.v_Q[i], Q);
 	}
 	return A;
