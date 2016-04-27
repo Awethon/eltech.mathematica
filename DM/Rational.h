@@ -5,14 +5,14 @@
 class Polynom;
 
 class Rational {
+	friend class Polynom;
+
 	BigInt Z;
 	Natural N;
 public:
 	Rational();
 	Rational(BigInt, Natural);
 	Rational(bool _sign, string str_Z, string str_N);
-
-	friend Polynom;
 
 	unsigned getSize_Z() const;
 	unsigned getSize_N() const;

@@ -65,7 +65,7 @@ Polynom::Polynom(unsigned pow, string input)
 	v_Q[k].N = N;
 }
 
-unsigned int Polynom::getexp() {
+unsigned int Polynom::getexp() { //DEG_PP_P
 	return n;
 }
 
@@ -118,26 +118,31 @@ unsigned Polynom::DEG_P_N(Polynom P) {
 	return P.n;
 };
 
-//Rational Polynom::FAC_P_Q(Polynom p) {
-//	int i;
-//	Natural NOD, NOK;
-//	// Предполагается, что степень многочлена больше 1
-//	for (i = 0;i < p.n; i++) // Вычисление НОДа числителей коэффицентов
-//	{
-//		if (i == 0)
-//			NOD = BigInt::ABS_Z_N(p.v_Q[0].Z);
-//		else
-//			NOD = Natural::GCF_NN_N(NOD, BigInt::ABS_Z_N(p.v_Q[i].Z));
-//	}
-//
-//	for (i = 0; i < p.n; i++) // Вычисление НОKа числителей коэффицентов
-//	{
-//		if (i == 0)
-//			NOK = TRANS_Z_N(ABS_Z_N(polinom.factor[0].denominator));
-//		else
-//			NOK = LCM_NN_N(TRANS_Z_N(ABS_Z_N(NOK)), TRANS_Z_N(ABS_Z_N(polinom.factor[i].denomerator)));
-//	}
-//};
+Rational Polynom::FAC_P_Q(Polynom p) {
+	int i;
+	Rational result;
+	Natural NOD,
+		NOK;
+	// Предполагается, что степень многочлена больше 1
+	for (i = 0;i< p.getexp(); i++) // Вычисление НОДа числителей коэффицентов
+	{
+		if (i == 0)
+			NOD = BigInt::ABS_Z_N(p.v_Q[0].Z);
+		else
+			NOD = Natural::GCF_NN_N(NOD, BigInt::ABS_Z_N(p.v_Q[i].Z));
+	}
+
+	for (i = 0; i < p.n; i++) // Вычисление НОKа числителей коэффицентов
+	{
+		if (i == 0)
+			NOK = p.v_Q[0].N;
+		else
+			NOK = Natural::LCM_NN_N(NOK, p.v_Q[i].N);
+	}
+	result.Z = BigInt::TRANS_N_Z(NOD);
+	result.N = NOK;
+	return result;
+};
 
 Polynom Polynom::MUL_PP_P(Polynom a, Polynom b) {
 	Polynom result(a.n + b.n), temp;

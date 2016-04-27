@@ -19,7 +19,7 @@ public:
 	static Polynom MUL_Pxk_P(Polynom a, unsigned int k);
 	static Rational LED_P_Q(Polynom);
 	static unsigned DEG_P_N(Polynom P);
-	//static Rational FAC_P_Q(Polynom);
+	static Rational FAC_P_Q(Polynom);
 	static Polynom MUL_PP_P(Polynom a, Polynom b);
 	//static Polynom DIV_PP_P(Polynom, Polynom);
 	//static Polynom MOD_PP_P(Polynom f, Polynom g);
