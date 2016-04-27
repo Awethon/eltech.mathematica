@@ -127,5 +127,5 @@ BigInt BigInt::DIV_ZZ_Z(const BigInt &a, const BigInt &b) {
 BigInt BigInt::MOD_ZZ_Z(const BigInt &a, const BigInt &b) {
 	if (POZ_Z_D(a) == POZ_Z_D(b))
 		return SUB_ZZ_Z(a, MUL_ZZ_Z(DIV_ZZ_Z(a, b), b));
-	return SUB_ZZ_Z(ADD_ZZ_Z(a, b), MUL_ZZ_Z(DIV_ZZ_Z(TRANS_N_Z(a.N), b), b));
+	return ADD_ZZ_Z(ADD_ZZ_Z(a, b), MUL_ZZ_Z(DIV_ZZ_Z(TRANS_N_Z(a.N), b), b));
 }
