@@ -21,10 +21,10 @@ public:
 	static unsigned DEG_P_N(Polynom P);
 	static Rational FAC_P_Q(Polynom);
 	static Polynom MUL_PP_P(Polynom a, Polynom b);
-	//static Polynom DIV_PP_P(Polynom, Polynom);
-	//static Polynom MOD_PP_P(Polynom f, Polynom g);
+	static Polynom DIV_PP_P(Polynom, Polynom);
+	static Polynom MOD_PP_P(Polynom f, Polynom g);
 	static Polynom GCF_PP_P(Polynom, Polynom);
 	static Polynom DER_P_P(Polynom a);
-	//static Polynom NMR_P_P(Polynom);
+	static Polynom NMR_P_P(Polynom);
 
 };

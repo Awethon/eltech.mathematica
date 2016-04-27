@@ -27,13 +27,11 @@ Polynom::Polynom(unsigned pow, string input)
 
 	for (int i = 0; i < input.length(); i++) {
 		switch (input[i]) {
-		case '-':
-		{
+		case '-': {
 			tmp_sign = true;
 			break;
 		}
-		case '/':
-		{
+		case '/': {
 			BigInt Z(tmp_sign, tmp_Z);
 			v_Q[k].Z = Z;
 			tmp_Z.clear();
@@ -41,8 +39,7 @@ Polynom::Polynom(unsigned pow, string input)
 			tmp_sign = false;
 			break;
 		}
-		case ' ':
-		{
+		case ' ': {
 			Natural N(tmp_N);
 			v_Q[k].N = N;
 			tmp_N.clear();
@@ -50,8 +47,7 @@ Polynom::Polynom(unsigned pow, string input)
 			k--;
 			break;
 		}
-		default:
-		{
+		default: {
 			if (isN == false)
 				tmp_Z.push_back(input[i]);
 			else
@@ -59,7 +55,7 @@ Polynom::Polynom(unsigned pow, string input)
 			break;
 		}
 		}
-				
+
 	}
 	Natural N(tmp_N);
 	v_Q[k].N = N;
@@ -122,9 +118,9 @@ Rational Polynom::FAC_P_Q(Polynom p) {
 	int i;
 	Rational result;
 	Natural NOD,
-		NOK;
+	        NOK;
 	// Предполагается, что степень многочлена больше 1
-	for (i = 0;i< p.getexp(); i++) // Вычисление НОДа числителей коэффицентов
+	for (i = 0; i < p.getexp(); i++) // Вычисление НОДа числителей коэффицентов
 	{
 		if (i == 0)
 			NOD = BigInt::ABS_Z_N(p.v_Q[0].Z);
@@ -154,25 +150,39 @@ Polynom Polynom::MUL_PP_P(Polynom a, Polynom b) {
 	return result;
 };
 
-//Polynom Polynom::DIV_PP_P(Polynom A, Polynom B) {
-//
-//};
+Polynom Polynom::DIV_PP_P(Polynom A, Polynom B) {
+	Polynom C(int(A.n) - int(B.n) < 0 ? 0 : A.n - B.n);
+	int i;
 
-//Polynom Polynom::MOD_PP_P(Polynom f, Polynom g) {
-//	return SUB_PP_P(f, MUL_PP_P(g, DIV_PP_P(f, g)));
-//};
+	if (int(A.n) - int(B.n) < 0) {
+		Rational tmp(0, "0", "1");
+		C.v_Q[0] = tmp;
+	}
+	else {
+		for (i = C.n; i >= 0; i--) {
+			C.v_Q[i] = Rational::DIV_QQ_Q(A.v_Q[i + B.n], B.v_Q[B.n]);
+			A = SUB_PP_P(A, MUL_PQ_P(MUL_Pxk_P(B, i), C.v_Q[i]));
+		}
+	}
 
-//Polynom Polynom::GCF_PP_P(Polynom p1, Polynom p2) {
-//	while ((DEG_P_N(p1) != 0 && BigInt::POZ_Z_D(p1.v_Q[0].Z) != 0) || (DEG_P_N(p2) != 0 && BigInt::POZ_Z_D(p2.v_Q[0].Z) != 0)) {
-//		if (DEG_P_N(p1) >= DEG_P_N(p2))
-//			p1 = MOD_PP_P(p1, p2);
-//		else
-//			p2 = MOD_PP_P(p2, p1);
-//	}
-//	if (DEG_P_N(p1) != 0 || BigInt::POZ_Z_D(p2.v_Q[0].Z) != 0)
-//		return p1;
-//	return p2;
-//};
+	return C;
+};
+
+Polynom Polynom::MOD_PP_P(Polynom f, Polynom g) {
+	return SUB_PP_P(f, MUL_PP_P(g, DIV_PP_P(f, g)));
+};
+
+Polynom Polynom::GCF_PP_P(Polynom p1, Polynom p2) {
+	while ((DEG_P_N(p1) != 0 && BigInt::POZ_Z_D(p1.v_Q[0].Z) != 0) || (DEG_P_N(p2) != 0 && BigInt::POZ_Z_D(p2.v_Q[0].Z) != 0)) {
+		if (DEG_P_N(p1) >= DEG_P_N(p2))
+			p1 = MOD_PP_P(p1, p2);
+		else
+			p2 = MOD_PP_P(p2, p1);
+	}
+	if (DEG_P_N(p1) != 0 || BigInt::POZ_Z_D(p2.v_Q[0].Z) != 0)
+		return p1;
+	return p2;
+};
 
 Polynom Polynom::DER_P_P(Polynom a) {
 	Polynom C(a.n);
@@ -185,7 +195,7 @@ Polynom Polynom::DER_P_P(Polynom a) {
 	return C;
 };
 
-//Polynom Polynom::NMR_P_P(Polynom) {
-//	return DIV_PP_P(pNum, GFC_PP_P(pNum, DER_P_P(pNum)));
-//};
+Polynom Polynom::NMR_P_P(Polynom p) {
+	return DIV_PP_P(p, GCF_PP_P(p, DER_P_P(p)));
+};
 
