@@ -15,6 +15,9 @@ public:
 	Crypto();
 	Crypto(uint64_t, uint64_t);
 
+	/**
+	* Половинкин Алексей 5308;
+	*/
 	vector<uint64_t> encrypt(string);
 	string decrypt(vector<uint64_t>);
 	string hack(vector<uint64_t> encrypt);
