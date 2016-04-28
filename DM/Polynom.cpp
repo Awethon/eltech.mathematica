@@ -2,8 +2,6 @@
 #include <iostream>
 #include "Polynom.h"
 
-void output(Polynom);
-
 Polynom::Polynom()
 	: n(0) {
 	Rational Q(0, "0", "1");
@@ -130,7 +128,6 @@ Polynom Polynom::MUL_Pxk_P(Polynom a, int k) {
 	for (i = a.n + k; i >= k; i--) {
 		result.v_Q[i] = a.v_Q[i - k]; // Значения в массиве коэффициентов сдвигаются к старшим степеням
 		cout << "i = " << i << "\nk = " << k << '\n';
-		output(result);
 	}
 	return result;
 };
@@ -174,11 +171,8 @@ Polynom Polynom::MUL_PP_P(Polynom a, Polynom b) {
 	Polynom temp;
 	for (int i = 0; i <= b.n; i++) {
 		temp = MUL_PQ_P(a, b.v_Q[i]);
-		output(temp);
-		temp = MUL_Pxk_P(temp, i);
-		output(temp);
+		temp = MUL_Pxk_P(temp, i);;
 		result = ADD_PP_P(result, temp);
-		output(result);
 	}
 	return result;
 };
