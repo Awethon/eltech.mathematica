@@ -12,6 +12,7 @@ class Crypto
 	unsigned long m;
 	unsigned e;
 public:
+	Crypto();
 	Crypto(uint64_t, uint64_t);
 
 	vector<uint64_t> encrypt(string);

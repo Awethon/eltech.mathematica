@@ -56,6 +56,10 @@ uint64_t modpow_expsqr(uint64_t x, uint64_t e, uint32_t M)
 	return P;
 }
 
+Crypto::Crypto() {
+	d = m = e = 1;
+}
+
 Crypto::Crypto(uint64_t p, uint64_t q)
 	:m(p*q)
 {

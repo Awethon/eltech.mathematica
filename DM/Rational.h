@@ -13,6 +13,7 @@ public:
 	Rational();
 	Rational(BigInt, Natural);
 	Rational(bool _sign, string str_Z, string str_N);
+	Rational(string);
 
 	unsigned getSize_Z() const;
 	unsigned getSize_N() const;

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include "Rational.h"
+#include <cvt/wstring>
 
 Rational::Rational()
 	: Z("0"), N("1") {
@@ -13,6 +14,24 @@ Rational::Rational(BigInt Z, Natural N)
 Rational::Rational(bool sign, string str_Z, string str_N)
 	: Z(sign, str_Z), N(str_N) {
 }
+
+Rational::Rational(string str) {
+	int i = 0;
+	bool sign;
+	if (str[0] == '-') {
+		i++;
+		sign = 1;
+	}
+	size_t pos = str.find("/");
+	string strZ = str.substr(i, pos - i);
+	if (sign == 1) strZ = "-" + strZ;
+	string strN = str.substr(pos + 1);
+	Z = BigInt(strZ);
+	N = Natural(strN);
+
+
+}
+
 
 unsigned int Rational::getSize_Z() const{
 	return Z.getSize();

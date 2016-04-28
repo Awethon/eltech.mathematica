@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Polynom.h"
 
+void output(Polynom);
+
 Polynom::Polynom()
 	: n(0) {
 	Rational Q(0, "0", "1");
@@ -90,22 +92,31 @@ Polynom Polynom::SUB_PP_P(Polynom p1, Polynom p2) {
 	for (int i = 0; i <= lesser_p; i++) {
 		result.v_Q[i] = Rational::RED_Q_Q(Rational::SUB_QQ_Q(p1.v_Q[i], p2.v_Q[i]));
 	}
-	return result;
+	for (int i = result.n; i >= 0; i--) {
+		if (i == result.n && result.n != 0 && result.v_Q[i].Z.getSize() == 1 && result.v_Q[i].Z.getDigit(0) == 0) {
+			result.n--;
+		}
+		return result;
+	}
 };
 
 Polynom Polynom::MUL_PQ_P(Polynom A, Rational Q) {
+	Polynom result(A.n);
 	for (int i = 0; i <= A.n; i++) {
-		A.v_Q[i] = Rational::MUL_QQ_Q(A.v_Q[i], Q);
+		result.v_Q[i] = Rational::MUL_QQ_Q(A.v_Q[i], Q);
 	}
-	return A;
+	return result;
 };
 
-Polynom Polynom::MUL_Pxk_P(Polynom a, unsigned int k) {
+Polynom Polynom::MUL_Pxk_P(Polynom a, int k) {
 	int i;
 	Polynom result(a.n + k);
 	// Длина массива коэффициентов увеличивается на k
+	cout << "ОП\n";
 	for (i = a.n + k; i >= k; i--) {
 		result.v_Q[i] = a.v_Q[i - k]; // Значения в массиве коэффициентов сдвигаются к старшим степеням
+		cout << "i = " << i << "\nk = " << k << '\n';
+		output(result);
 	}
 	return result;
 };
@@ -145,11 +156,15 @@ Rational Polynom::FAC_P_Q(Polynom p) {
 };
 
 Polynom Polynom::MUL_PP_P(Polynom a, Polynom b) {
-	Polynom result(a.n + b.n), temp;
-	for (int i = 0; i <= result.n; i++) {
+	Polynom result(a.n + b.n);
+	Polynom temp;
+	for (int i = 0; i <= b.n; i++) {
 		temp = MUL_PQ_P(a, b.v_Q[i]);
+		output(temp);
 		temp = MUL_Pxk_P(temp, i);
+		output(temp);
 		result = ADD_PP_P(result, temp);
+		output(result);
 	}
 	return result;
 };
@@ -177,8 +192,9 @@ Polynom Polynom::MOD_PP_P(Polynom f, Polynom g) {
 };
 
 Polynom Polynom::GCF_PP_P(Polynom p1, Polynom p2) {
-	while ((DEG_P_N(p1) != 0 && BigInt::POZ_Z_D(p1.v_Q[0].Z) != 0) || (DEG_P_N(p2) != 0 && BigInt::POZ_Z_D(p2.v_Q[0].Z) != 0)) {
-		if (DEG_P_N(p1) >= DEG_P_N(p2))
+	while ((DEG_P_N(p1) != 0 || BigInt::POZ_Z_D(p1.v_Q[0].Z) != 0) && 
+		   (DEG_P_N(p2) != 0 || BigInt::POZ_Z_D(p2.v_Q[0].Z) != 0)) {
+		if (DEG_P_N(p1) > DEG_P_N(p2))
 			p1 = MOD_PP_P(p1, p2);
 		else
 			p2 = MOD_PP_P(p2, p1);
@@ -189,7 +205,7 @@ Polynom Polynom::GCF_PP_P(Polynom p1, Polynom p2) {
 };
 
 Polynom Polynom::DER_P_P(Polynom a) {
-	Polynom C(a.n);
+	Polynom C(a.n - 1);
 	int i;
 	for (i = 0; i < a.n; i++) {
 		C.v_Q[i] = a.v_Q[i + 1];
@@ -202,4 +218,5 @@ Polynom Polynom::DER_P_P(Polynom a) {
 Polynom Polynom::NMR_P_P(Polynom p) {
 	return DIV_PP_P(p, GCF_PP_P(p, DER_P_P(p)));
 };
+
 
