@@ -7,10 +7,6 @@ BigInt::BigInt() {
 	sign = 0;
 }
 
-//BigInt::BigInt(bool _sign, string kek)
-//	: sign(_sign), N(kek) {
-//}
-
 BigInt::BigInt(string strZ) {
 	if (strZ[0] == '-') {
 		sign = 1;
