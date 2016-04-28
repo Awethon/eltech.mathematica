@@ -212,8 +212,7 @@ Natural Natural::GCF_NN_N(Natural a, Natural b) {
 		x = y; //присваиваем x значение y
 		y = r; //присваиваем y значение r (остатка) Автор комментариев: Яковлева Наталья
 	}
-	}
-};
+}
 
 Natural Natural::LCM_NN_N(const Natural &a, const Natural &b) {
 	return DIV_NN_N(MUL_NN_N(a, b), GCF_NN_N(a, b));
