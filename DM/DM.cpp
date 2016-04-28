@@ -422,6 +422,11 @@ void cryptomenu() {
 	unsigned start_time, end_time, search_time;
 	int num;
 	while (x != 0) {
+		puts("1 - Введите два простых числа");
+		puts("2 - Шифровка сообщения");
+		puts("3 - Расшифровка сообщения");
+		puts("4 - Хакнуть сообщение");
+		puts("5 - Подписать сообщение");
 		cin >> x;
 		switch (x) {
 		case 1:
@@ -481,9 +486,13 @@ void cryptomenu() {
 		}
 	}
 }
+
+void primemenu() {
+	
+}
+
 int main(int argc, char* argv[]) {
 	setlocale(LC_ALL, "Russian");
-	unsigned int start_time = clock();
 	//uint64_t n = 10;
 	//if (argv[1])
 	//	n = std::atol(argv[1]);
@@ -492,13 +501,15 @@ int main(int argc, char* argv[]) {
 	//std::cout << n << "th prime = " << nth_prime << std::endl;
 	//prime numbers  < 18315
 
-	//Crypto lol(18311, 18313);
-	//vector<uint64_t> kek = lol.encrypt("LIFE");
-	//string heh = lol.hack(kek);
-	//cout << heh;
-
 	unsigned x = 1;
 	while (x != 0) {
+		puts("1 - Натуральные числа");
+		puts("2 - Целые числа");
+		puts("3 - Рациональные числа");
+		puts("4 - Многочлены");
+		puts("5 - Криптография");
+		puts("6 - Простые числа");
+		puts("Введите пункт меню: ");
 		cin >> x;
 		switch (x) {
 		case 1:
@@ -516,11 +527,11 @@ int main(int argc, char* argv[]) {
 		case 5:
 			cryptomenu();
 			break;
+		case 6:
+			primemenu();
+			break;
 		}
 	}
-	unsigned int end_time = clock();
-	unsigned int search_time = end_time - start_time;
-	cout << search_time << '\n';
 	system("pause");
 	return 0;
 }
